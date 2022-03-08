@@ -1,0 +1,19 @@
+@import "../public/assets/css/plugins/bootstrap.min.css";
+@import "../public/assets/css/plugins/slick.css";
+@import "../public/assets/css/plugins/magnific-popup.css";
+@import "../public/assets/css/plugins/animate.css";
+@import "../public/assets/fonts/flaticon/flaticon.css";
+@import "../public/assets/fonts/font-awesome.min.css";
+@import "../public/assets/css/style.css";
+@import "../public/assets/css/responsive.css";
+
+.progress_box {
+  padding: 22px 26px;
+}
+a {
+  cursor: pointer;
+}
+
+html {
+  scroll-behavior: smooth;
+}
