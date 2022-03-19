@@ -11,10 +11,23 @@ import Home1Testimonials from "../src/components/wellcon/Home1/Home1Testimonials
 import Home1VideoBox from "../src/components/wellcon/Home1/Home1VideoBox";
 import Layout from "../src/layout/Layout";
 
-const Index = () => {
+import {
+  useStoryblokState,
+  useStoryblokApi,
+  StoryblokComponent,
+} from "@storyblok/react";
+
+const Index = ({ story: initialStory }) => {
+  const story = useStoryblokState(initialStory);
+
+  if (!story.content) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <Layout>
       <Home1Banner />
+      <StoryblokComponent blok={story.content} />;
       <Home1About />
       <Home1Features />
       <Hom1skills />
@@ -40,5 +53,20 @@ const Index = () => {
     </Layout>
   );
 };
+
+export async function getStaticProps({ preview = true }) {
+  const storyblokApi = useStoryblokApi();
+  let { data } = await storyblokApi.get(`cdn/stories/home`, {
+    version: "draft",
+  });
+
+  return {
+    props: {
+      story: data ? data.story : false,
+      preview,
+    },
+    revalidate: 3600, // revalidate every hour
+  };
+}
 
 export default Index;
